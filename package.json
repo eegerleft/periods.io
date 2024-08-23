@@ -1,0 +1,50 @@
+# Define the starting time for the first period
+from datetime import datetime, timedelta
+
+# Function to generate the schedule
+def generate_schedule(start_time, period_duration, num_periods):
+    current_time = start_time
+    schedule = []
+
+    for period in range(1, num_periods + 1):
+        end_time = current_time + period_duration
+        period_info = {
+            "Period": period,
+            "Start Time": current_time.strftime('%I:%M %p'),
+            "End Time": end_time.strftime('%I:%M %p')
+        }
+        schedule.append(period_info)
+        current_time = end_time
+
+    return schedule
+
+# Configuration
+start_time = datetime.strptime("07:04 AM", '%I:%M %p')
+period_duration = timedelta(minutes=46)
+num_periods = 10
+
+# Generate the schedule
+schedule = generate_schedule(start_time, period_duration, num_periods)
+
+# Print the schedule
+for period in schedule:
+    print(f"Period {period['Period']}: {period['Start Time']} - {period['End Time']}")
+
+# Sample Output:
+# Period 0: 07:04 AM - 07:50 AM
+# Period 1: 07:55 AM - 08:41 AM
+# Period 2: 08:46 AM - 09:32 AM
+# Period 3: 09:37 AM - 10:23 AM
+# Den: 10:28 AM - 10:58 AM
+# Period 4: 11:03 AM - 11:26 AM
+# Period 5: 11:31 AM - 11:54 AM
+# Period 6: 11:59 AM - 12:22 PM
+# Period 7: 12:27 PM - 12:50 PM
+# Period 8: 12:55 PM - 01:18 PM
+# Period 9: 01:23 PM - 02:09 PM
+# Period 10: 02:14 PM - 03:00 PM
+
+git add schedule-template.json
+git commit -m "Updated schedule template"
+git push origin main
+weekendsOff: true 
